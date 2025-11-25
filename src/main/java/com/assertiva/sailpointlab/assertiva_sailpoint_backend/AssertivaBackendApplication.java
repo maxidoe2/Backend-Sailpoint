@@ -2,20 +2,23 @@ package com.assertiva.sailpointlab.assertiva_sailpoint_backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+
+import com.assertiva.sailpointlab.assertiva_sailpoint_backend.security.BasicAuthFilter;
 
 @SpringBootApplication
 public class AssertivaBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AssertivaBackendApplication.class, args);
-	}
-	
-	@Bean
-	public FilterRegistrationBean<BasicAuthFilter> authFilter(BasicAuthFilter filter) {
-    	FilterRegistrationBean<BasicAuthFilter> registration = new FilterRegistrationBean<>();
-    	registration.setFilter(filter);
-    	registration.addUrlPatterns("/*"); // Protege toda la API
-    return registration;
-}
+    public static void main(String[] args) {
+        SpringApplication.run(AssertivaBackendApplication.class, args);
+    }
 
+    @Bean
+    public FilterRegistrationBean<BasicAuthFilter> authFilter(BasicAuthFilter filter) {
+        FilterRegistrationBean<BasicAuthFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(filter);
+        registration.addUrlPatterns("/*"); // Protege toda la API
+        return registration;
+    }
 }
